@@ -13,6 +13,7 @@ const CommentSchema = new Schema({
     }
 });
 
-const Article = mongoose.model("Comment", CommentSchema);
+const Comments = mongoose.model("Comments", CommentSchema);
 
-module.exports = Article;
+module.exports = Comments;
+
