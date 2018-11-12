@@ -1,16 +1,21 @@
 var a = location.pathname.split("/");
-console.log(a);
-
 $.ajax({
     method: "GET",
     url: "/api/" + a[2]
-  })
+})
     // With that done, add the note information to the page
-    .then(function(data) {
-      console.log(data);
-            $("#articles").append(`<h3 id="title" data-id="${data._id}"><a href="${data.link}">${data.title}</a></h3>`);
-            $("#articles").append(`<p data-id="${data._id}"><a href="${data.link}">${data.description}</a></p>`);
-            $("#articles").append(`<a href="/comments/${data._id}">Comments</a>`);
+    .then(function (data) {
+        console.log(data);
+        console.log(data.comments.length);
+        $("#articles").append(`<h3 id="title" data-id="${data._id}"><a href="${data.link}">${data.title}</a></h3>`);
+        $("#articles").append(`<p data-id="${data._id}"><a href="${data.link}">${data.description}</a></p>`);
+        $("#articles").append(`<a href="/comments/${data._id}">Comments</a>`);
+        for (let i = 0; i < data.comments.length; i++) {
+            $.getJSON("/api/comments/" + data.comments[i], function (data) {
+                $("#commentsection").append(`<h3 id="comment" data-id="${data._id}">${data.commenter}</h3><p>${data.body}</p>`);
+           
+            })
+            }
         });
 
 $("#postcomment").on("click", function () {
@@ -28,6 +33,7 @@ $("#postcomment").on("click", function () {
         // With that done
         .then(function (data) {
             // Log the response
+            console.log("___________________")
             console.log(data);
             // Empty the notes section
         });

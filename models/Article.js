@@ -14,7 +14,11 @@ const ArticleSchema = new Schema({
     description: {
         type: String,
         require: true
-    }
+    },
+    comments: [{
+        type: String,
+        ref: "Comments"
+    }]
     
 });
 

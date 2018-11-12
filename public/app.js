@@ -1,5 +1,3 @@
-alert(1);
-
 $.getJSON("/articles", function(data) {
     console.log(data);
     for (let i = 0; i < data.length; i++) {
@@ -9,6 +7,6 @@ $.getJSON("/articles", function(data) {
     }
 });
 
-$.get("/comments/:id"), function(data) {
-    console.log(data);
+$.get("/api/:id"), function(data) {
+    console.log(data.comments);
 }
